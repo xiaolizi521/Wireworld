@@ -1,0 +1,12 @@
+{
+   "sample" : {
+      "a" : 100,
+      "b" : 300
+   }, // some comments here:
+   "screen" : {
+      "a" : 100,
+      "b" : 300,
+      "c" : 3.050,
+      "d" : true
+   }
+}
