@@ -19,9 +19,10 @@
 					<Add directory="C:\Program Files\SDL_1_2_14\include" />
 				</Compiler>
 				<Linker>
-					<Add library="C:\Program Files\JsonCpp\libs\mingw\libjson_mingw_libmt.a" />
-					<Add library="C:\Program Files\SDL_1_2_14\lib\libSDL.dll.a" />
+					<Add library="mingw32" />
 					<Add library="C:\Program Files\SDL_1_2_14\lib\libSDLmain.a" />
+					<Add library="C:\Program Files\SDL_1_2_14\lib\libSDL.dll.a" />
+					<Add library="C:\Program Files\JsonCpp\libs\mingw\libjson_mingw_libmt.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -38,6 +39,9 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="mingw32" />
+					<Add library="C:\Program Files\SDL_1_2_14\lib\libSDLmain.a" />
+					<Add library="C:\Program Files\SDL_1_2_14\lib\libSDL.dll.a" />
 					<Add library="C:\Program Files\JsonCpp\libs\mingw\libjson_mingw_libmt.a" />
 				</Linker>
 			</Target>
