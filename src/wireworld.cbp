@@ -16,9 +16,12 @@
 					<Add directory="C:\Program Files\boost_1_46" />
 					<Add directory="D:\_Slava\_Wireworld\src\" />
 					<Add directory="C:\Program Files\JsonCpp\include" />
+					<Add directory="C:\Program Files\SDL_1_2_14\include" />
 				</Compiler>
 				<Linker>
 					<Add library="C:\Program Files\JsonCpp\libs\mingw\libjson_mingw_libmt.a" />
+					<Add library="C:\Program Files\SDL_1_2_14\lib\libSDL.dll.a" />
+					<Add library="C:\Program Files\SDL_1_2_14\lib\libSDLmain.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -31,6 +34,7 @@
 					<Add directory="C:\Program Files\boost_1_46" />
 					<Add directory="D:\_Slava\_Wireworld\src\" />
 					<Add directory="C:\Program Files\JsonCpp\include" />
+					<Add directory="C:\Program Files\SDL_1_2_14\include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />

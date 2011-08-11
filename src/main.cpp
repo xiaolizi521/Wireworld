@@ -8,9 +8,9 @@
 
 //***************************************************************************************************************
 
-int main()
-{
-	// create singletons:
+ int main(int argc, char *argv[])
+ {
+     // create singletons:
 	CLogManager::Guard    g_LMan;
 	CConfigManager::Guard g_CMan;
 	CRenderManager::Guard g_RMan;

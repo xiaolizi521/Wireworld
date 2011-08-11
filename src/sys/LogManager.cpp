@@ -32,4 +32,14 @@ void CLogManager::Err(std::string msg)
     exit(1);
 }
 
+// shortcut for writing errors:
+
+void CLogManager::Check(bool test, std::string msg)
+{
+    if (!test)
+    {
+        Err(msg);
+    }
+}
+
 //***************************************************************************************************************

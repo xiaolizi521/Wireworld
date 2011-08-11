@@ -16,6 +16,9 @@ public:
 	void Log(std::string msg);
 	void Err(std::string msg);
 
+	// our test for critical errors:
+	void Check(bool test, std::string msg);
+
 private:
 	explicit CLogManager();
 	virtual ~CLogManager();
@@ -33,6 +36,9 @@ namespace LMan
 
 	inline void Err(std::string msg)
 	{ CLogManager::Get()->Err(msg); }
+
+	inline void Check(bool test, std::string msg)
+	{ CLogManager::Get()->Check(test, msg); }
 }
 
 //***************************************************************************************************************

@@ -59,11 +59,8 @@ CConfigManager::CConfigManager()
 
     // parse json string:
 	Json::Reader reader;
-	if (!reader.parse(str, m_root))
-	{
-        // terminate with parsing error:
-        LMan::Err(reader.getFormatedErrorMessages());
-	}
+	bool result = reader.parse(str, m_root);
+	LMan::Check(result, reader.getFormatedErrorMessages());
 }
 
 CConfigManager::~CConfigManager()
@@ -77,11 +74,8 @@ CConfigManager::~CConfigManager()
 CConfigSection CConfigManager::GetSection(std::string name)
 {
     // ensure that our section exists:
-    if (m_root[name].empty())
-    {
-        std::string errMessage = "missing cfg section" + name;
-        LMan::Err(errMessage);
-    }
+    bool hasSect = !m_root[name].empty();
+    LMan::Check(hasSect, "missing config section");
 
     // return actual config section:
 	return CConfigSection(m_root, name);

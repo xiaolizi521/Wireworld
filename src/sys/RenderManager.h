@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <boost/intrusive_ptr.hpp>
+#include <SDL/SDL.h>
 
 #include "util/Singleton.h"
 #include "util/RefCount.h"
@@ -65,6 +66,7 @@ private:
 	virtual ~CRenderManager();
 
 	Hash m_hash;
+	SDL_Surface *m_disp;
 };
 
 //***************************************************************************************************************

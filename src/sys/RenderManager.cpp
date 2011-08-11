@@ -1,5 +1,6 @@
 
 #include "RenderManager.h"
+#include "LogManager.h"
 
 //***************************************************************************************************************
 
@@ -27,10 +28,19 @@ void CPackage::DrawSprite(std::string sprite, int index)
 
 CRenderManager::CRenderManager()
 {
+    // perform SDL initialization:
+    int result = SDL_Init(SDL_INIT_EVERYTHING);
+    LMan::Check((result == 0), "failed to initialize SDL");
+
+    // create display surface:
+    m_disp = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+    LMan::Check((m_disp != 0), "failed to set video mode");
 }
 
 CRenderManager::~CRenderManager()
 {
+    SDL_FreeSurface(m_disp);
+    SDL_Quit();
 }
 
 void CRenderManager::Attach(std::string package)
@@ -42,8 +52,8 @@ void CRenderManager::Attach(std::string package)
 		assert(pack);
 
 		m_hash.insert(Hash::value_type(package, pack));
-	} 
-	else 
+	}
+	else
 	{
 		CPackage::Ref pack = iter->second;
 		assert(pack);
