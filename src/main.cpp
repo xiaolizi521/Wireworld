@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "sys/LogManager.h"
 #include "sys/SceneManager.h"
 #include "sys/ConfigManager.h"
 #include "sys/InputManager.h"
@@ -10,10 +11,13 @@
 int main()
 {
 	// create singletons:
-	CSceneManager::Guard  g_SMan;
+	CLogManager::Guard    g_LMan;
 	CConfigManager::Guard g_CMan;
-	CInputManager::Guard  g_IMan;
 	CRenderManager::Guard g_RMan;
+	CSceneManager::Guard  g_SMan;
+	CInputManager::Guard  g_IMan;
+
+    LMan::Log("Start the game");
 
 	CConfigSection screen = CMan::GetSection("screen");
 	assert(screen.IsValid());
