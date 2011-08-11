@@ -1,17 +1,14 @@
-#include <fstream>
-#include "ConfigManager.h"
 
+#include <fstream>
+
+#include "ConfigManager.h"
+#include "LogManager.h"
 
 //***************************************************************************************************************
 
 CConfigSection::CConfigSection(Json::Value &root, std::string name)
 : m_name(name), m_root(root)
 {
-}
-
-bool CConfigSection::IsValid() const
-{
-	return !m_root[m_name].empty();
 }
 
 // getters:
@@ -54,14 +51,19 @@ CConfigManager::CConfigManager()
 {
 	typedef std::istreambuf_iterator<char> Iterator;
 
+	// get file content:
 	std::ifstream ifs("config.json");
 	Iterator beg = Iterator(ifs);
 	Iterator end = Iterator();
-
 	std::string str(beg, end);
-	Json::Reader reader;
 
-	reader.parse(str, m_root);
+    // parse json string:
+	Json::Reader reader;
+	if (!reader.parse(str, m_root))
+	{
+        // terminate with parsing error:
+        LMan::Err(reader.getFormatedErrorMessages());
+	}
 }
 
 CConfigManager::~CConfigManager()
@@ -74,6 +76,14 @@ CConfigManager::~CConfigManager()
 
 CConfigSection CConfigManager::GetSection(std::string name)
 {
+    // ensure that our section exists:
+    if (m_root[name].empty())
+    {
+        std::string errMessage = "missing cfg section" + name;
+        LMan::Err(errMessage);
+    }
+
+    // return actual config section:
 	return CConfigSection(m_root, name);
 }
 

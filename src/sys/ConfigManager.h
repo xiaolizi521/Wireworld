@@ -13,7 +13,6 @@ class CConfigSection
 {
 public:
 	explicit CConfigSection(Json::Value &root, std::string name);
-	bool IsValid() const;
 
 	int   GetInteger(std::string key);
 	bool  GetBoolean(std::string key);

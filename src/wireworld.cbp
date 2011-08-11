@@ -47,12 +47,15 @@
 		<Unit filename="sys\ConfigManager.h" />
 		<Unit filename="sys\InputManager.cpp" />
 		<Unit filename="sys\InputManager.h" />
+		<Unit filename="sys\LogManager.cpp" />
+		<Unit filename="sys\LogManager.h" />
 		<Unit filename="sys\RenderManager.cpp" />
 		<Unit filename="sys\RenderManager.h" />
 		<Unit filename="sys\SceneManager.cpp" />
 		<Unit filename="sys\SceneManager.h" />
 		<Unit filename="util\RefCount.h" />
 		<Unit filename="util\Singleton.h" />
+		<Unit filename="util\VecUtils.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

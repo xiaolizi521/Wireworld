@@ -7,6 +7,7 @@
 CLogManager::CLogManager()
 {
     m_file.open("wireworld.log");
+    assert(m_file.is_open());
 }
 
 CLogManager::~CLogManager()

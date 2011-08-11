@@ -17,10 +17,7 @@ int main()
 	CSceneManager::Guard  g_SMan;
 	CInputManager::Guard  g_IMan;
 
-    LMan::Log("Start the game");
-
 	CConfigSection screen = CMan::GetSection("screen");
-	assert(screen.IsValid());
 
 	int a = screen.GetInteger("a");
 	int b = screen.GetInteger("b");
