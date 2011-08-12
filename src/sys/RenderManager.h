@@ -61,6 +61,10 @@ public:
 	// drawing operations:
 	void DrawSprite (std::string package, std::string sprite, int index);
 
+    // loop operations:
+    void BegFrame();
+    void EndFrame();
+
 private:
 	explicit CRenderManager();
 	virtual ~CRenderManager();
@@ -74,13 +78,19 @@ private:
 namespace RMan
 {
 	inline void Attach(std::string package)
-	{ return CRenderManager::Get()->Attach(package); }
+	{ CRenderManager::Get()->Attach(package); }
 
 	inline void Release(std::string package)
-	{ return CRenderManager::Get()->Release(package); }
+	{ CRenderManager::Get()->Release(package); }
 
 	inline void DrawSprite(std::string package, std::string sprite, int index)
-	{ return CRenderManager::Get()->DrawSprite(package, sprite, index); }
+	{ CRenderManager::Get()->DrawSprite(package, sprite, index); }
+
+	inline void BegFrame()
+	{ CRenderManager::Get()->BegFrame(); }
+
+	inline void EndFrame()
+	{ CRenderManager::Get()->EndFrame(); }
 }
 
 //***************************************************************************************************************

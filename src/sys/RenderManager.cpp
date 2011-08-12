@@ -43,6 +43,8 @@ CRenderManager::~CRenderManager()
     SDL_Quit();
 }
 
+// package management:
+
 void CRenderManager::Attach(std::string package)
 {
 	Hash::iterator iter = m_hash.find(package);
@@ -76,6 +78,8 @@ void CRenderManager::Release(std::string package)
 	}
 }
 
+// drawing operations:
+
 void CRenderManager::DrawSprite(std::string package, std::string sprite, int index)
 {
 	Hash::iterator iter = m_hash.find(package);
@@ -85,6 +89,18 @@ void CRenderManager::DrawSprite(std::string package, std::string sprite, int ind
 	assert(pack);
 
 	pack->DrawSprite(sprite, index);
+}
+
+// loop operations:
+
+void CRenderManager::BegFrame()
+{
+
+}
+
+void CRenderManager::EndFrame()
+{
+    SDL_Flip(m_disp);
 }
 
 //***************************************************************************************************************
