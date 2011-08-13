@@ -1,4 +1,6 @@
+
 #include "SceneManager.h"
+#include "RenderManager.h"
 
 //***************************************************************************************************************
 
@@ -29,10 +31,16 @@ void CSceneManager::RunGameLoop()
 {
 	while (HasScenes())
 	{
+	    // pre-frame operations:
+		RMan::BegFrame();
+
 		CScene::Ptr top = GetTop();
 
 		top->OnUpdate();
 		top->OnRender();
+
+	    // post-frame operations:
+		RMan::EndFrame();
 	}
 }
 

@@ -2,11 +2,16 @@
    "sample" : {
       "a" : 100,
       "b" : 300
-   }, // some comments here:
+   },
    "screen" : {
       "a" : 100,
       "b" : 300,
       "c" : 3.050,
       "d" : true
+   },
+   "window" : {
+      "full" : false,
+      "height" : 768,
+      "width" : 1024
    }
 }

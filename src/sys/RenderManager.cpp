@@ -1,6 +1,7 @@
 
 #include "RenderManager.h"
 #include "LogManager.h"
+#include "ConfigManager.h"
 
 //***************************************************************************************************************
 
@@ -32,8 +33,17 @@ CRenderManager::CRenderManager()
     int result = SDL_Init(SDL_INIT_EVERYTHING);
     LMan::Check((result == 0), "failed to initialize SDL");
 
+    // read display configuration:
+    CConfigSection cfg = CMan::GetSection("window");
+
+    const int wid = cfg.GetInteger("width");
+    const int hgt = cfg.GetInteger("height");
+
+    Uint32 flags = SDL_HWSURFACE | SDL_DOUBLEBUF;
+    flags |= cfg.GetBoolean("full") ? SDL_FULLSCREEN : SDL_NOFRAME;
+
     // create display surface:
-    m_disp = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+    m_disp = SDL_SetVideoMode(wid, hgt, 32, flags);
     LMan::Check((m_disp != 0), "failed to set video mode");
 }
 
