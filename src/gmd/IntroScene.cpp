@@ -1,5 +1,6 @@
 #include "IntroScene.h"
 #include "sys/InputManager.h"
+#include "sys/RenderManager.h"
 
 //***************************************************************************************************************
 
@@ -13,10 +14,12 @@ CIntroScene::~CIntroScene()
 
 void CIntroScene::OnEnter()
 {
+    RMan::Attach("pack");
 }
 
 void CIntroScene::OnLeave()
 {
+    RMan::Release("pack");
 }
 
 void CIntroScene::OnUpdate()

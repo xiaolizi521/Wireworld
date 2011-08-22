@@ -2,13 +2,36 @@
 #include "RenderManager.h"
 #include "LogManager.h"
 #include "ConfigManager.h"
+#include <SDL/SDL_image.h>
 
 //***************************************************************************************************************
 
-CPackage::CPackage()
-: m_refs(1)
+// c-tor and d-tor:
+
+CPackage::CPackage(std::string name)
+: m_refs(1), m_surf(NULL)
 {
+    // resolve file path:
+    CConfigSection cfg  = CMan::GetSection("path");
+    std::string sprRoot = cfg.GetString("sprites");
+
+    std::string imgPath = sprRoot + name + ".png";
+    std::string dscPath = sprRoot + name + ".json";
+
+    // load and check:
+    LoadSurf(imgPath);
+    LoadDesc(dscPath);
+
+    LMan::Check(m_surf != NULL, "failed to load surface");
+    //LMan::Check(m_hash.empty(), "failed to load descriptor");
 }
+
+CPackage::~CPackage()
+{
+    if (m_surf) { SDL_FreeSurface(m_surf); }
+}
+
+// ref management:
 
 int CPackage::IncRef()
 {
@@ -20,9 +43,27 @@ int CPackage::DecRef()
 	return -- m_refs;
 }
 
+// drawing:
+
 void CPackage::DrawSprite(std::string sprite, int index)
 {
 	Hash::iterator it = m_hash.find(sprite);
+}
+
+// loaders:
+
+void CPackage::LoadSurf(std::string path)
+{
+	if (SDL_Surface *res = IMG_Load(path.c_str()))
+	{
+		m_surf = SDL_DisplayFormatAlpha(res);
+        SDL_FreeSurface(res);
+	}
+}
+
+void CPackage::LoadDesc(std::string path)
+{
+    // TODO :: IMPLEMENT
 }
 
 //***************************************************************************************************************
@@ -55,15 +96,15 @@ CRenderManager::~CRenderManager()
 
 // package management:
 
-void CRenderManager::Attach(std::string package)
+void CRenderManager::Attach(std::string name)
 {
-	Hash::iterator iter = m_hash.find(package);
+	Hash::iterator iter = m_hash.find(name);
 	if (iter == m_hash.end())
 	{
-		CPackage::Ref pack = new CPackage();
+		CPackage::Ref pack = new CPackage(name);
 		assert(pack);
 
-		m_hash.insert(Hash::value_type(package, pack));
+		m_hash.insert(Hash::value_type(name, pack));
 	}
 	else
 	{

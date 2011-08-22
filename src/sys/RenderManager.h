@@ -30,7 +30,8 @@ public:
 
 public:
 	// c-tor and d-tor:
-	explicit CPackage();
+	explicit CPackage(std::string name);
+	virtual ~CPackage();
 
 	// refs management:
 	int IncRef();
@@ -42,6 +43,12 @@ public:
 private:
 	int  m_refs;
 	Hash m_hash;
+
+	SDL_Surface *m_surf;
+
+	// loading helpers:
+	void LoadSurf(std::string path);
+	void LoadDesc(std::string path);
 };
 
 //***************************************************************************************************************
