@@ -22,6 +22,10 @@ public:
 	void  SetBoolean(std::string key, bool val);
 	void  SetFloat(std::string key, float val);
 
+	// also support std::string:
+	std::string GetString(std::string key);
+	void SetString(std::string key, std::string val);
+
 private:
 	std::string  m_name;
 	Json::Value &m_root;
@@ -41,7 +45,7 @@ private:
 	virtual ~CConfigManager();
 
 	// actual doc root:
-	Json::Value  m_root;
+	Json::Value m_root;
 };
 
 //***************************************************************************************************************

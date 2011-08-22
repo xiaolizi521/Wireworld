@@ -28,6 +28,11 @@ float CConfigSection::GetFloat(std::string key)
 	return (float)m_root[m_name][key].asDouble();
 }
 
+std::string CConfigSection::GetString(std::string key)
+{
+    return m_root[m_name][key].asString();
+}
+
 // setters:
 
 void CConfigSection::SetInteger(std::string key, int val)
@@ -41,6 +46,11 @@ void CConfigSection::SetBoolean(std::string key, bool val)
 }
 
 void CConfigSection::SetFloat(std::string key, float val)
+{
+	m_root[m_name][key] = val;
+}
+
+void CConfigSection::SetString(std::string key, std::string val)
 {
 	m_root[m_name][key] = val;
 }
