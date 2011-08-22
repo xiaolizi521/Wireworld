@@ -106,6 +106,8 @@ void CRenderManager::DrawSprite(std::string package, std::string sprite, int ind
 void CRenderManager::BegFrame()
 {
 
+    SDL_Rect rc = {0,0,100,100};
+    SDL_FillRect(m_disp, &rc, 0xFFFFFF00);
 }
 
 void CRenderManager::EndFrame()

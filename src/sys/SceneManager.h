@@ -16,7 +16,7 @@ public:
 	typedef boost::intrusive_ptr<CScene> Ptr;
 
 public:
-	virtual ~CScene() = 0;
+	virtual ~CScene() {}
 
 	virtual void OnEnter()  = 0;
 	virtual void OnLeave()  = 0;

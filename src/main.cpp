@@ -6,6 +6,8 @@
 #include "sys/InputManager.h"
 #include "sys/RenderManager.h"
 
+#include "gmd/IntroScene.h"
+
 //***************************************************************************************************************
 
  int main(int argc, char *argv[])
@@ -33,6 +35,7 @@
 	sample.SetInteger("b", 300);
 
 	// enjoy the game:
+	SMan::PushScene(new CIntroScene());
 	SMan::RunGameLoop();
 
 	return 0;
