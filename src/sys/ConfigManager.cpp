@@ -59,18 +59,8 @@ void CConfigSection::SetString(std::string key, std::string val)
 
 CConfigManager::CConfigManager()
 {
-	typedef std::istreambuf_iterator<char> Iterator;
-
-	// get file content:
-	std::ifstream ifs("config.json");
-	Iterator beg = Iterator(ifs);
-	Iterator end = Iterator();
-	std::string str(beg, end);
-
-    // parse json string:
-	Json::Reader reader;
-	bool result = reader.parse(str, m_root);
-	LMan::Check(result, reader.getFormatedErrorMessages());
+    bool result = JsonFromFile("config.json", m_root);
+	LMan::Check(result, "failed to parse config file");
 }
 
 CConfigManager::~CConfigManager()
@@ -85,7 +75,7 @@ CConfigSection CConfigManager::GetSection(std::string name)
 {
     // ensure that our section exists:
     bool hasSect = !m_root[name].empty();
-    LMan::Check(hasSect, "missing config section");
+    LMan::Check(hasSect, "failed to find config section");
 
     // return actual config section:
 	return CConfigSection(m_root, name);

@@ -65,6 +65,8 @@
 		<Unit filename="sys\RenderManager.h" />
 		<Unit filename="sys\SceneManager.cpp" />
 		<Unit filename="sys\SceneManager.h" />
+		<Unit filename="util\JsonUtils.cpp" />
+		<Unit filename="util\JsonUtils.h" />
 		<Unit filename="util\RefCount.h" />
 		<Unit filename="util\Singleton.h" />
 		<Unit filename="util\VecUtils.h" />

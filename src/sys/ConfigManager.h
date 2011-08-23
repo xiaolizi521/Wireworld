@@ -2,10 +2,8 @@
 #ifndef __CONFIGMANAGER_H__
 #define __CONFIGMANAGER_H__
 
-#include <string>
-#include <json/json.h>
-
 #include "util/Singleton.h"
+#include "util/JsonUtils.h"
 
 //***************************************************************************************************************
 
