@@ -1,0 +1,7 @@
+{
+   "sprites" : 
+   [
+      { "name" : "test1", "count" : 3, "top" : 100, "left" : 100, "wid" : 30, "hgt" : 30 },
+      { "name" : "test2", "count" : 3, "top" : 100, "left" : 100, "wid" : 30, "hgt" : 30 }
+   ]
+}

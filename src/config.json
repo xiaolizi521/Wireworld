@@ -1,4 +1,7 @@
 {
+   "path" : {
+      "sprites" : "../res/sprites/"
+   },
    "sample" : {
       "a" : 100,
       "b" : 300
@@ -13,8 +16,5 @@
       "full" : false,
       "height" : 768,
       "width" : 1024
-   },
-   "path" : {
-      "sprites" : "../res/sprites/"
    }
 }

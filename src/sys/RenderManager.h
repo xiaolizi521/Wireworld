@@ -9,14 +9,15 @@
 
 #include "util/Singleton.h"
 #include "util/RefCount.h"
+#include "util/VecUtils.h"
 
 //***************************************************************************************************************
 
 struct CSprite
 {
-	int top;
-	int lft;
-	int count;
+	CVec orig;
+	CVec size;
+	int  count;
 };
 
 //***************************************************************************************************************

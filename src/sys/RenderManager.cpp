@@ -2,6 +2,7 @@
 #include "RenderManager.h"
 #include "LogManager.h"
 #include "ConfigManager.h"
+#include "util/JsonUtils.h"
 #include <SDL/SDL_image.h>
 
 //***************************************************************************************************************
@@ -23,7 +24,7 @@ CPackage::CPackage(std::string name)
     LoadDesc(dscPath);
 
     LMan::Check(m_surf != NULL, "failed to load surface");
-    //LMan::Check(m_hash.empty(), "failed to load descriptor");
+    LMan::Check(m_hash.size(),  "failed to load descriptor");
 }
 
 CPackage::~CPackage()
@@ -63,7 +64,24 @@ void CPackage::LoadSurf(std::string path)
 
 void CPackage::LoadDesc(std::string path)
 {
-    // TODO :: IMPLEMENT
+    Json::Value root;
+    JsonFromFile(path, root);
+
+    Json::Value list = root["sprites"];
+    for (size_t index = 0; index < list.size(); ++ index)
+    {
+        Json::Value desc = list[index];
+        std::string name = desc["name"].asString();
+
+        CSprite sprite;
+        sprite.count  = desc["count"].asInt();
+        sprite.orig.x = desc["left"].asInt();
+        sprite.orig.y = desc["top"].asInt();
+        sprite.size.x = desc["wid"].asInt();
+        sprite.size.y = desc["hgt"].asInt();
+
+        m_hash.insert(Hash::value_type(name, sprite));
+    }
 }
 
 //***************************************************************************************************************
