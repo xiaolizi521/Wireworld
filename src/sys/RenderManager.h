@@ -39,7 +39,7 @@ public:
 	int DecRef();
 
 	// drawing operations:
-	void DrawSprite (std::string sprite, int index);
+	void DrawSprite (SDL_Surface *disp, std::string sprite, int index);
 
 private:
 	int  m_refs;

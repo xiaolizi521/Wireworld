@@ -29,7 +29,14 @@ CPackage::CPackage(std::string name)
 
 CPackage::~CPackage()
 {
-    if (m_surf) { SDL_FreeSurface(m_surf); }
+    if (m_surf)
+    {
+        SDL_FreeSurface(m_surf);
+    }
+    if (m_hash.size())
+    {
+        m_hash.clear();
+    }
 }
 
 // ref management:
@@ -46,9 +53,19 @@ int CPackage::DecRef()
 
 // drawing:
 
-void CPackage::DrawSprite(std::string sprite, int index)
+void CPackage::DrawSprite(SDL_Surface *disp, std::string sprite, int index)
 {
+    /***
 	Hash::iterator it = m_hash.find(sprite);
+	if (iter != m_hash.end())
+	{
+
+
+	}
+	***/
+
+	SDL_BlitSurface(m_surf, 0, disp, 0);
+
 }
 
 // loaders:
@@ -157,7 +174,7 @@ void CRenderManager::DrawSprite(std::string package, std::string sprite, int ind
 	CPackage::Ref pack = iter->second;
 	assert(pack);
 
-	pack->DrawSprite(sprite, index);
+	pack->DrawSprite(m_disp, sprite, index);
 }
 
 // loop operations:

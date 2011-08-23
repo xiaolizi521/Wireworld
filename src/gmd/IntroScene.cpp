@@ -33,6 +33,7 @@ void CIntroScene::OnUpdate()
 
 void CIntroScene::OnRender()
 {
+    RMan::DrawSprite("pack", "player", 1);
 }
 
 //***************************************************************************************************************
