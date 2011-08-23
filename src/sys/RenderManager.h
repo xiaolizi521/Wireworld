@@ -31,7 +31,7 @@ public:
 
 public:
 	// c-tor and d-tor:
-	explicit CPackage(std::string name);
+	explicit CPackage(std::string name, SDL_Surface *disp);
 	virtual ~CPackage();
 
 	// refs management:
@@ -39,13 +39,14 @@ public:
 	int DecRef();
 
 	// drawing operations:
-	void DrawSprite (SDL_Surface *disp, std::string sprite, int index);
+	void DrawSprite(std::string sprite, CVec position, CVec index);
 
 private:
 	int  m_refs;
 	Hash m_hash;
 
 	SDL_Surface *m_surf;
+	SDL_Surface *m_disp;
 
 	// loading helpers:
 	void LoadSurf(std::string path);
@@ -67,7 +68,7 @@ public:
 	void Release (std::string package);
 
 	// drawing operations:
-	void DrawSprite (std::string package, std::string sprite, int index);
+	void DrawSprite(std::string package, std::string sprite, CVec position, CVec index);
 
     // loop operations:
     void BegFrame();
@@ -91,8 +92,8 @@ namespace RMan
 	inline void Release(std::string package)
 	{ CRenderManager::Get()->Release(package); }
 
-	inline void DrawSprite(std::string package, std::string sprite, int index)
-	{ CRenderManager::Get()->DrawSprite(package, sprite, index); }
+	inline void DrawSprite(std::string package, std::string sprite, CVec position, CVec index)
+	{ CRenderManager::Get()->DrawSprite(package, sprite, position, index); }
 
 	inline void BegFrame()
 	{ CRenderManager::Get()->BegFrame(); }

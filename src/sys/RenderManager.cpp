@@ -9,8 +9,8 @@
 
 // c-tor and d-tor:
 
-CPackage::CPackage(std::string name)
-: m_refs(1), m_surf(NULL)
+CPackage::CPackage(std::string name, SDL_Surface *disp)
+: m_refs(1), m_surf(NULL), m_disp(disp)
 {
     // resolve file path:
     CConfigSection cfg  = CMan::GetSection("path");
@@ -53,19 +53,18 @@ int CPackage::DecRef()
 
 // drawing:
 
-void CPackage::DrawSprite(SDL_Surface *disp, std::string sprite, int index)
+void CPackage::DrawSprite(std::string sprite, CVec position, CVec index)
 {
-    /***
 	Hash::iterator it = m_hash.find(sprite);
-	if (iter != m_hash.end())
+	if (it != m_hash.end())
 	{
+        CSprite spr = it->second;
 
+        SDL_Rect rcSrc = { spr.orig.x + index.x * spr.size.x, spr.orig.y + index.y * spr.size.y, spr.size.x, spr.size.y };
+        SDL_Rect rcDst = { position.x, position.y, spr.size.x, spr.size.y };
 
+        SDL_BlitSurface(m_surf, &rcSrc, m_disp, &rcDst);
 	}
-	***/
-
-	SDL_BlitSurface(m_surf, 0, disp, 0);
-
 }
 
 // loaders:
@@ -136,7 +135,7 @@ void CRenderManager::Attach(std::string name)
 	Hash::iterator iter = m_hash.find(name);
 	if (iter == m_hash.end())
 	{
-		CPackage::Ref pack = new CPackage(name);
+		CPackage::Ref pack = new CPackage(name, m_disp);
 		assert(pack);
 
 		m_hash.insert(Hash::value_type(name, pack));
@@ -166,7 +165,7 @@ void CRenderManager::Release(std::string package)
 
 // drawing operations:
 
-void CRenderManager::DrawSprite(std::string package, std::string sprite, int index)
+void CRenderManager::DrawSprite(std::string package, std::string sprite, CVec position, CVec index)
 {
 	Hash::iterator iter = m_hash.find(package);
 	assert(iter != m_hash.end());
@@ -174,16 +173,14 @@ void CRenderManager::DrawSprite(std::string package, std::string sprite, int ind
 	CPackage::Ref pack = iter->second;
 	assert(pack);
 
-	pack->DrawSprite(m_disp, sprite, index);
+	pack->DrawSprite(sprite, position, index);
 }
 
 // loop operations:
 
 void CRenderManager::BegFrame()
 {
-
-    SDL_Rect rc = {0,0,100,100};
-    SDL_FillRect(m_disp, &rc, 0xFFFFFF00);
+    SDL_FillRect(m_disp, NULL, 0x00);
 }
 
 void CRenderManager::EndFrame()

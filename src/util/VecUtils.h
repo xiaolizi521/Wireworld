@@ -9,6 +9,9 @@ public:
     explicit CVec() : x(0), y(0)
     {}
 
+    explicit CVec(int nxy) : x(nxy), y(nxy)
+    {}
+
     explicit CVec(int nx, int ny) : x(nx), y(ny)
     {}
 
